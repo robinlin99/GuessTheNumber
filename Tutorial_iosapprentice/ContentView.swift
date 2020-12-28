@@ -54,7 +54,6 @@ struct ContentView: View {
                     // MARK: - Button 3
                     Button(action: {
                             equals = target == integer
-                            print(equals)
                     }) {
                         Text("🍔").font(.largeTitle).fontWeight(.heavy).foregroundColor(Color.white).padding()
                     }
@@ -62,7 +61,6 @@ struct ContentView: View {
                 // MARK: - Info Button
                 Button(action: {
                         alertIsVisible3 = true
-                        print("Info Button Clicked")
                 }) {
                     Text("💡").font(.largeTitle).fontWeight(.heavy).foregroundColor(Color.white).padding()
                 }.position(x: 50, y: 750)
