@@ -6,107 +6,101 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct ContentView: View {
     @State var alertIsVisible1: Bool = false
     @State var alertIsVisible2: Bool = false
     @State var alertIsVisible3: Bool = false
-    @State var target: Int = 10
+    @State var alertIsVisible4: Bool = false
+    @State var target: Int = Int.random(in: 0..<3)
     @State var integer: Int = 0
+    @State var equals: Bool = false
     var body: some View {
-        ZStack {
-            Color.black.ignoresSafeArea()
-            VStack {
-                Text("🔥: \(integer)")
-                    .font(.title)
-                    .fontWeight(.bold)
-                    .foregroundColor(.blue)
-                    .padding()
-                HStack {
-                    VStack {
+        if !equals {
+            ZStack {
+                Color.orange.ignoresSafeArea()
+                VStack {
+                    Text("🔥: \(integer)")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .multilineTextAlignment(.center)
+                        .padding()
+                    Spacer()
                     // MARK: - Button 1
-                        Button(action: {
-                                integer += 1
-                                self.alertIsVisible1 = true}) {
-                            Text("Add").font(.headline).padding()
-                        }
-                        .alert(isPresented: self.$alertIsVisible1) {
-                            Alert(title: Text("Added 1!"),
-                                  message: Text("You have added 1."),
-                                  dismissButton: .default(Text("Go back.")))
-                        }
-                        // MARK: - Button 2
-                        Button(action: {
-                                integer -= 1
-                                self.alertIsVisible2 = true}) {
-                            Text("Subtract").font(.headline).padding()
-                                
-                        }
-                        .alert(isPresented: self.$alertIsVisible2) {
-                            Alert(title: Text("Subtracted 1"),
-                                  message: Text("You have subtracted 1"),
-                                  dismissButton: .default(Text("Go back.")))
-                        }
-                        // MARK: - Button 3
-                        Button(action: {
-                                self.alertIsVisible3 = true}) {
-                            Text("Check Equality").font(.headline).padding()
-                        }
-                        .alert(isPresented: self.$alertIsVisible3) {
-                            Alert(title: Text("Checking if equal to \(target)"),
-                                  message: Text("\(String(target == integer))".capitalized),
-                                  dismissButton: .default(Text("Go back.")))
-                        }
-                        
-                        // MARK: - Button 4
-                        Button(action: {integer = 0}) {
-                            Text("Reset").font(.headline).padding()
-                        }
+                    Button(action: {
+                            integer += 1
+                            self.alertIsVisible1 = true}) {
+                        Text("⬆️").font(.largeTitle).fontWeight(.heavy).foregroundColor(Color.white).padding()
                     }
-                    VStack {
-                    // MARK: - Button 1
-                        Button(action: {
-                                integer += 1
-                                self.alertIsVisible1 = true}) {
-                            Text("Add").font(.headline).padding()
-                        }
-                        .alert(isPresented: self.$alertIsVisible1) {
-                            Alert(title: Text("Added 1!"),
-                                  message: Text("You have added 1."),
-                                  dismissButton: .default(Text("Go back.")))
-                        }
-                        // MARK: - Button 2
-                        Button(action: {
-                                integer -= 1
-                                self.alertIsVisible2 = true}) {
-                            Text("Subtract").font(.headline).padding()
-                                
-                        }
-                        .alert(isPresented: self.$alertIsVisible2) {
-                            Alert(title: Text("Subtracted 1"),
-                                  message: Text("You have subtracted 1"),
-                                  dismissButton: .default(Text("Go back.")))
-                        }
-                        // MARK: - Button 3
-                        Button(action: {
-                                self.alertIsVisible3 = true}) {
-                            Text("Check Equality").font(.headline).padding()
-                        }
-                        .alert(isPresented: self.$alertIsVisible3) {
-                            Alert(title: Text("Checking if equal to \(target)"),
-                                  message: Text("\(String(target == integer))".capitalized),
-                                  dismissButton: .default(Text("Go back.")))
-                        }
-                        
-                        // MARK: - Button 4
-                        Button(action: {integer = 0}) {
-                            Text("Reset").font(.headline).padding()
-                        }
+                    .alert(isPresented: self.$alertIsVisible1) {
+                        Alert(title: Text("Added 1!"),
+                              message: Text("You have added 1."),
+                              dismissButton: .default(Text("Think you got it? Click 🍔.")))
+                    }
+                    // MARK: - Button 2
+                    Button(action: {
+                            integer -= 1
+                            self.alertIsVisible2 = true}) {
+                        Text("⬇️").font(.largeTitle).fontWeight(.heavy).foregroundColor(Color.white)
+                            
+                    }
+                    .alert(isPresented: self.$alertIsVisible2) {
+                        Alert(title: Text("Subtracted 1!"),
+                              message: Text("You have subtracted 1."),
+                              dismissButton: .default(Text("Think you got it? Click 🍔.")))
+                    }
+                    // MARK: - Button 3
+                    Button(action: {
+                            equals = target == integer
+                            print(equals)
+                    }) {
+                        Text("🍔").font(.largeTitle).fontWeight(.heavy).foregroundColor(Color.white).padding()
+                    }
+                }
+                // MARK: - Info Button
+                Button(action: {
+                        alertIsVisible3 = true
+                        print("Info Button Clicked")
+                }) {
+                    Text("💡").font(.largeTitle).fontWeight(.heavy).foregroundColor(Color.white).padding()
+                }.position(x: 50, y: 750)
+                .alert(isPresented: self.$alertIsVisible3) {
+                    Alert(title: Text("Game Instructions"),
+                          message: Text("Click ⬆️ or ⬇️ to change your current guess. If you think you've got it, click 🍔."),
+                          dismissButton: .default(Text("Start Guessing")))
+                }
+            }
+        }
+        else {
+            ZStack {
+                Color.blue.ignoresSafeArea()
+                VStack {
+                    Text("🔥: 💯")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .multilineTextAlignment(.center)
+                        .padding()
+                    Spacer().frame(height: 200)
+                    Text("You got it! 🎉🎉🎉")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .multilineTextAlignment(.center)
+                        .padding()
+                    
+                    Button(action: {
+                            equals = false
+                            target = Int.random(in: 0..<3)
+                            integer = 0
+                    }) {
+                        Text("🔄").font(.largeTitle).fontWeight(.heavy)
                     }
                 }
             }
         }
-        
     }
 }
 
