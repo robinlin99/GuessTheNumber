@@ -19,7 +19,7 @@ struct ContentView: View {
     var body: some View {
         if !equals {
             ZStack {
-                Color.orange.ignoresSafeArea()
+                Color.red.ignoresSafeArea()
                 VStack {
                     Text("🔥: \(integer)")
                         .font(.largeTitle)
